@@ -17,6 +17,7 @@ import ServicesSection from '@/components/organisms/ServicesSection/ServicesSect
 import TestimonialsSection from '@/components/organisms/TestimonialsSection/TestimonialsSection';
 import { ThemeProvider } from '@emotion/react';
 import CssBaseline from '@mui/material/CssBaseline';
+import { Analytics } from '@vercel/analytics/react';
 
 import theme from './theme';
 
@@ -46,6 +47,7 @@ export default function Home() {
           <FooterSection />
         </main>
       </ThemeProvider>
+      <Analytics />
     </HotjarWrapper >
   );
 }
