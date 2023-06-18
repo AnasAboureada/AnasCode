@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { InferType, object, string } from 'yup';
@@ -27,9 +28,13 @@ const ContactSection = () => {
 
   type FormData = InferType<typeof contactMeSchema>;
 
-  const { handleSubmit, register, reset, formState: { errors, isSubmitting, isSubmitted } } = useForm<FormData>({
+  const { handleSubmit, register, reset, formState: { errors, isSubmitting } } = useForm<FormData>({
     resolver: yupResolver(contactMeSchema),
   });
+
+  const [formStatus, setFormStatus] = useState({ success: false, error: false });
+  const messageWaitTime = 10000;
+
 
   const onSubmit = (data: FormData) => {
     registerGaEvent({ action: 'conversion', category: 'contact', label: 'contactform', value: 1 });
@@ -48,10 +53,13 @@ const ContactSection = () => {
       .then((res) => res.json())
       .then(() => {
         reset();
+        setFormStatus({ success: true, error: false });
+        setTimeout(() => setFormStatus({ success: false, error: false }), messageWaitTime);
       })
       .catch((err) => {
-        console.error(err);
-        // handle error here...
+        setFormStatus({ success: false, error: true });
+        setTimeout(() => setFormStatus({ success: false, error: false }), messageWaitTime);
+        registerGaEvent({ action: 'exception', category: 'contact', label: 'contactform', value: err });
       });
   };
 
@@ -124,13 +132,19 @@ const ContactSection = () => {
             >
               {t('home.contact.formSubmitButton')}
             </Button>
-            {isSubmitted && <p className={'font-sans text-success mt-2'} role="alert">{t('home.contact.formSubmitted')}</p>}
+            {formStatus.success &&
+              <Typography variant='body1' className={'font-sans text-success mt-2'} role="alert">
+                {t('home.contact.formSubmitted')}
+              </Typography>}
+            {formStatus.error &&
+              <Typography variant='body1' className={'font-sans text-error mt-2'} role="alert">
+                {t('home.contact.formSubmitError')}
+              </Typography>}
           </form>
         </Grid>
 
         <Grid sm={12} md={6} className="flex-col">
-          <Box>
-
+          <Box className="mt-6">
             <Typography align="center" gutterBottom className={'font-sans'} >
               <PlaceIcon className='mr-2' />
               {t('home.contact.location')}

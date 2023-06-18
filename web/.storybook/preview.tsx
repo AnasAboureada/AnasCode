@@ -1,8 +1,11 @@
 import '!style-loader!css-loader!postcss-loader!tailwindcss/tailwind.css';
 
+import '../src/app/globals.css';
+
 import React from 'react';
 
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { withThemeByClassName } from '@storybook/addon-styling';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import type { Preview } from '@storybook/react';
 
@@ -11,21 +14,20 @@ import i18n from '../src/i18next.js';
 
 export const globalTypes = {
   theme: {
-    name: "Theme",
-    title: "Theme",
-    description: "Theme for your components",
-    defaultValue: "light",
+    name: 'Theme',
+    title: 'Theme',
+    description: 'Theme for your components',
+    defaultValue: 'light',
     toolbar: {
-      icon: "paintbrush",
+      icon: 'paintbrush',
       dynamicTitle: true,
       items: [
-        { value: "light", left: "☀️", title: "Light mode" },
-        { value: "dark", left: "🌙", title: "Dark mode" },
+        { value: 'light', left: '☀️', title: 'Light mode' },
+        { value: 'dark', left: '🌙', title: 'Dark mode' },
       ],
     },
   },
 };
-
 
 const customViewports = {
   desktop: {
@@ -49,8 +51,8 @@ const preview: Preview = {
     i18n,
     locale: 'en',
     locales: {
-      en: { title: "English", left: '🇺🇸' },
-      nl: { title: "Dutch", left: '🇳🇱' },
+      en: { title: 'English', left: '🇺🇸' },
+      nl: { title: 'Dutch', left: '🇳🇱' },
     },
     viewport: {
       viewports: {
@@ -69,12 +71,22 @@ const preview: Preview = {
 };
 
 export const withMuiTheme = (Story) => (
-  <ThemeProvider theme={theme} >
+  <ThemeProvider theme={theme}>
     <CssBaseline />
     <Story />
   </ThemeProvider>
 );
 
-export const decorators = [withMuiTheme];
+export const decorators = [
+  withMuiTheme, // Adds theme switching support.
+  // NOTE: requires setting "darkMode" to "class" in your tailwind config
+  withThemeByClassName({
+    themes: {
+      light: 'light',
+      dark: 'dark',
+    },
+    defaultTheme: 'light',
+  }),
+];
 
 export default preview;

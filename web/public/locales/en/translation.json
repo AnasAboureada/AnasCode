@@ -81,9 +81,10 @@
         "message": "Message"
       },
       "formSubmitButton": "Send Message",
-      "location": "Amsterdam, Noord Holland, The Netherlands",
+      "location": "Amsterdam, The Netherlands 🇳🇱",
       "email": "contact@anascode.com",
-      "formSubmitted": "Thank you for sending me a message! I will reply to you as soon as possible."
+      "formSubmitted": "Thank you for sending me a message! I will reply to you as soon as possible.",
+      "formSubmitError": "An error occurred while sending your message. Please try again later."
     }
   }
 }

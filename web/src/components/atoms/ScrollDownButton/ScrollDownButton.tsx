@@ -17,7 +17,7 @@ const ScrollDownButton = ({ className }: ScrollDownButtonProps) => {
   };
 
   return (
-    <Box className={`animate-bounce200 flex align-center justify-center items-center ${className}`}>
+    <Box className={`hidden sm:block animate-bounce200 flex align-center justify-center items-center ${className}`}>
       <IconButton
         onClick={scrollToBottom}
         color="primary"

@@ -13,10 +13,13 @@ const config: StorybookConfig = {
     '@storybook/addon-a11y',
     'storybook-react-i18next',
     {
-      name: "@storybook/addon-styling",
+      name: '@storybook/addon-styling',
       options: {
         cssModules: true,
-      }
+        postcss: {
+          implementation: require.resolve('postcss'),
+        },
+      },
     },
   ],
   framework: {
@@ -29,7 +32,7 @@ const config: StorybookConfig = {
   webpackFinal: async (config, { configType }) => {
     config.resolve.alias = {
       ...config.resolve.alias,
-      '@/components': path.resolve(__dirname, "../src/components"),
+      '@/components': path.resolve(__dirname, '../src/components'),
     };
 
     // config.module.rules.push({
@@ -38,14 +41,12 @@ const config: StorybookConfig = {
     //   include: path.resolve(__dirname, '../node_modules'),
     // });
 
-
-
     return config;
   },
   typescript: {
     check: false,
     checkOptions: {},
-    reactDocgen: "react-docgen-typescript",
+    reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {
       // speeds up storybook build time
       allowSyntheticDefaultImports: false,
@@ -56,12 +57,8 @@ const config: StorybookConfig = {
       // makes string and boolean types that can be undefined appear as inputs and switches
       shouldRemoveUndefinedFromOptional: true,
       // Filter out third-party props from node_modules except @mui packages
-      propFilter: (prop) =>
-        prop.parent
-          ? !/node_modules\/(?!@mui)/.test(prop.parent.fileName)
-          : true,
+      propFilter: (prop) => (prop.parent ? !/node_modules\/(?!@mui)/.test(prop.parent.fileName) : true),
     },
   },
-
 };
 export default config;
