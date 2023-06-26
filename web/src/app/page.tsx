@@ -2,8 +2,6 @@
 
 import '../i18next';
 
-import { Montserrat } from 'next/font/google';
-
 import HotjarWrapper from '@/components/libs/Hotjar';
 import AboutSection from '@/components/organisms/AboutSection/AboutSection';
 import AchievementsSection from '@/components/organisms/AchievementsSection/AchievementsSection';
@@ -19,14 +17,7 @@ import { ThemeProvider } from '@emotion/react';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Analytics } from '@vercel/analytics/react';
 
-import theme from './theme';
-
-const montserrat = Montserrat({
-  subsets: ['latin'],
-  style: 'normal',
-  variable: '--font-montserrat',
-  display: 'swap',
-});
+import theme, { montserrat } from './theme';
 
 export default function Home() {
 

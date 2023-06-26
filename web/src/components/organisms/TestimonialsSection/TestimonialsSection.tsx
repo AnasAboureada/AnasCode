@@ -1,3 +1,5 @@
+'use client';
+
 import 'react-responsive-carousel/lib/styles/carousel.css';
 
 import React from 'react';

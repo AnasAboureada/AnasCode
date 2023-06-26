@@ -1,6 +1,25 @@
-import { createTheme } from '@mui/material/styles';
+'use client';
 
-const theme = createTheme({
+import { Lato, Montserrat } from 'next/font/google';
+
+import { createTheme, responsiveFontSizes } from '@mui/material/styles';
+
+export const montserrat = Montserrat({
+  subsets: ['latin'],
+  style: 'normal',
+  variable: '--font-montserrat',
+  display: 'swap',
+});
+
+export const lato = Lato({
+  subsets: ['latin'],
+  style: 'normal',
+  variable: '--font-lato',
+  display: 'swap',
+  weight: '700',
+});
+
+let theme = createTheme({
   palette: {
     primary: {
       main: '#1d3557',
@@ -74,6 +93,17 @@ const theme = createTheme({
   shape: {
     borderRadius: 4,
   },
+  breakpoints: {
+    values: {
+      xs: 0, // phones
+      sm: 600, // tablets
+      md: 960, // small laptops
+      lg: 1280, // desktops
+      xl: 1920, // large screens
+    },
+  },
 });
+
+theme = responsiveFontSizes(theme);
 
 export default theme;

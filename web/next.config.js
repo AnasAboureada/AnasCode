@@ -5,6 +5,19 @@ const nextConfig = {
   reactStrictMode: true,
   experimental: {
     forceSwcTransforms: true,
+    serverComponentsExternalPackages: ["mongoose"],
+    serverActions: true,
+    mdxRs: true,
+  },
+  compiler: {
+    styledComponents: true,
+  },
+  webpack(config) {
+    config.experiments = {
+      ...config.experiments,
+      topLevelAwait: true,
+    }
+    return config
   },
   images: {
     remotePatterns: [
@@ -16,6 +29,11 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'miro.medium.com',
+        port: '',
+      },
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
         port: '',
       },
     ],
