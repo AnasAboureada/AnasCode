@@ -1,25 +1,9 @@
-import https from 'https';
-
-import axios from 'axios';
 import { Metadata } from 'next';
 
+import { fetchArticle } from '@/components/libs/helpers';
 import { StickyActionsContainer } from '@/components/molecules/ArticleActions/ArticleActions';
 import ArticleHeader from '@/components/molecules/ArticleHeader/ArticleHeader';
 import { CustomMDX } from '@/components/molecules/MDX/MdxComponents';
-
-export const fetchArticle = async (url) => {
-  try {
-    const response = await axios.get(url, {
-      httpsAgent: new https.Agent({
-        rejectUnauthorized: false,
-      }),
-    });
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    throw new Error('Failed to fetch article');
-  }
-};
 
 export async function generateMetadata({ params }): Promise<Metadata> {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;

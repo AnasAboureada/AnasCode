@@ -26,9 +26,9 @@ async function dbConnect(): Promise<void> {
 
     connection.isConnected = db.connections[0].readyState;
 
-    mongoose.set('debug', (collectionName, method, query, doc) => {
-      console.log(`${collectionName}.${method}`, JSON.stringify(query), doc);
-    });
+    // mongoose.set('debug', (collectionName, method, query, doc) => {
+    //   console.log(`${collectionName}.${method}`, JSON.stringify(query), doc);
+    // });
 
     console.log('Connected to MongoDB');
   } catch (error: unknown) {

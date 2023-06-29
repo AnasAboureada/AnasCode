@@ -23,6 +23,8 @@ const ArticleActions: FC<ArticleActionsProps> = ({ slug, likes, views, showViews
   const [showSnackbar, setShowSnackbar] = useState(false);
 
   const handleShare = () => {
+    if (typeof window === 'undefined') return;
+
     const baseUrl = window.location.origin;
     const blogUrl = `${baseUrl}/blog/${slug}`;
     console.log('bookmarking...', blogUrl);

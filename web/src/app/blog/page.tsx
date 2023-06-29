@@ -1,10 +1,11 @@
 'use client';
 
-import '../../i18next';
+import '@/i18next';
 
 import { useEffect, useState } from 'react';
 
 import { IArticle } from '@/app/models/Article';
+import { montserrat } from '@/app/theme';
 import DataFetcher from '@/components/libs/DataFetcher';
 import BlogListCard, { ArticleCardSkeleton } from '@/components/molecules/BlogListCard/BlogListCard';
 import BlogSidebar from '@/components/organisms/BlogSidebar/BlogSidebar';
@@ -12,10 +13,9 @@ import Navbar from '@/components/organisms/Navbar/Navbar';
 import { Box, Pagination, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 
-import { montserrat } from '../theme';
-
 const BlogPage = () => {
   const [page, setPage] = useState(() => {
+    if (typeof window === 'undefined') return 1;
     const params = new URLSearchParams(window.location.search);
     const pageParam = params.get('page');
     return pageParam ? parseInt(pageParam, 10) : 1;
@@ -23,25 +23,25 @@ const BlogPage = () => {
 
   useEffect(() => {
     window.history.replaceState({}, '', `${window.location.pathname}?page=${page}`);
-  }, [page]);
 
-  useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     if (params.get('page')) {
       setPage(parseInt(params.get('page') as string, 10));
     }
-  }, []);
+  }, [page]);
 
   const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
-    window.history.replaceState({}, '', `${window.location.pathname}?page=${value}`);
+    if (typeof window !== 'undefined') {
+      window.history.replaceState({}, '', `${window.location.pathname}?page=${value}`);
+    }
   };
 
   return (
     <Box className={`mx-auto max-w-screen-xl bg-white ${montserrat.variable}`}>
       <Navbar />
       <Box className="h-20 flex items-center justify-center text-brand-color" >
-        <Typography variant="h4" component='h1'>Anas Aboreeda’s Blog</Typography>
+        <Typography variant="h4" component='h1'>Anas Aboreeda&apos;s Blog</Typography>
       </Box>
       <Grid container spacing={2} className="px-4 py-2 md:px-16 md:py-8">
         <Grid xs={12} md={9}>

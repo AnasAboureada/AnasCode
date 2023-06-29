@@ -36,9 +36,7 @@ export const POST = async (request: NextRequest) => {
     return NextResponse.json(info);
   } catch (error) {
     console.log(error);
-    // Fix me: handle error
-    return NextResponse.json({ error }, { status: 500 });
-
+    return NextResponse.json({ error: 'Error sending the email' }, { status: 500 });
   }
 
 };

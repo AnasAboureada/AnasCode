@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "rm -rf .next; node ./src/server.js",
+    "devHttps": "rm -rf .next; node ./src/server.js",
+    "dev": "rm -rf .next; next dev",
     "build": "next build",
     "start": "NODE_ENV=production node  ./src/server.js",
     "lint": "next lint --fix",

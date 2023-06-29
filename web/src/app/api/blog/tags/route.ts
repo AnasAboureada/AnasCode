@@ -2,7 +2,10 @@ import { NextResponse } from 'next/server';
 
 import Article from '@/app/models/Article';
 
+import dbConnect from '../../util/DbConnect';
+
 export const GET = async () => {
+  await dbConnect();
 
   const tags = await Article.aggregate([
     {

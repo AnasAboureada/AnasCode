@@ -1,3 +1,5 @@
+import https from 'https';
+
 import axios from 'axios';
 
 export const convertToTitleCase = (str: string) => {
@@ -20,10 +22,24 @@ export const convertToTitleCase = (str: string) => {
 export const callArticleEditApi = (slug: string, action: string) => {
   axios.put(`/api/blog/article?slug=${slug}&action=${action}`)
     .then((res) => {
-      console.log(res);
       return res.data;
     }).catch((err) => {
-      console.log(err);
+      console.debug(err);
+      return { success: false, message: 'Failed to update article' };
     });
+};
+
+export const fetchArticle = async (url: string) => {
+  try {
+    const response = await axios.get(url, {
+      httpsAgent: new https.Agent({
+        rejectUnauthorized: false,
+      }),
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw new Error('Failed to fetch article');
+  }
 };
 
