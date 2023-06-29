@@ -1,15 +1,13 @@
-import '@/i18next';
-
 import https from 'https';
 
 import axios from 'axios';
+import { Metadata } from 'next';
 
-import HotjarWrapper from '@/components/libs/Hotjar';
+import { StickyActionsContainer } from '@/components/molecules/ArticleActions/ArticleActions';
+import ArticleHeader from '@/components/molecules/ArticleHeader/ArticleHeader';
 import { CustomMDX } from '@/components/molecules/MDX/MdxComponents';
-import Navbar from '@/components/organisms/Navbar/Navbar';
-import { Analytics } from '@vercel/analytics/react';
 
-const fetchArticle = async (url) => {
+export const fetchArticle = async (url) => {
   try {
     const response = await axios.get(url, {
       httpsAgent: new https.Agent({
@@ -23,24 +21,46 @@ const fetchArticle = async (url) => {
   }
 };
 
+export async function generateMetadata({ params }): Promise<Metadata> {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+
+  const url = `${baseUrl}/api/blog/article?slug=${params.slug}`;
+  const data = await fetchArticle(url);
+
+
+  const { title, description } = data;
+
+  return {
+    title: `${title} | Anas Code | Anas Aboreeda`,
+    description: `${description} | Anas Code | Anas Aboreeda’s Blog`,
+  };
+}
+
 const Post = async ({ params }) => {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
   try {
     const url = `${baseUrl}/api/blog/article?slug=${params.slug}`;
     const data = await fetchArticle(url);
-    console.log(data);
+
+    const { title, author, authorImage, readTime, createdDate, slug, claps, views, category } = data;
 
     return (
-      <>
-        <HotjarWrapper >
-          <main className='mx-auto max-w-screen-l bg-white'>
-            <Navbar />
-            <CustomMDX source={data.content} />
-          </main>
-          <Analytics />
-        </HotjarWrapper >
-      </>
+      <main className='max-w-screen-xl px-4 py-2 md:px-16 md:py-8'>
+        <ArticleHeader
+          authorAvatar={authorImage}
+          authorName={author}
+          title={title}
+          readTime={readTime}
+          publishDate={createdDate}
+          likes={claps}
+          views={views}
+          slug={slug}
+          category={category}
+        />
+        <CustomMDX source={data.content} />
+        <StickyActionsContainer likes={claps} views={views} slug={slug} showViews={false} />
+      </main>
     );
   } catch (error) {
     console.error(error);

@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { FC, SetStateAction, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -46,19 +47,19 @@ const Navbar: FC = () => {
   const navLinks = [
     {
       label: 'home.nav.about',
-      href: '#about',
+      href: '/#about',
     },
     {
       label: 'home.nav.services',
-      href: '#services',
+      href: '/#services',
     },
     {
       label: 'home.nav.blog',
-      href: '#blog',
+      href: '/blog',
     },
     {
       label: 'home.nav.testimonials',
-      href: '#testimonials',
+      href: '/#testimonials',
     },
   ];
 
@@ -81,29 +82,33 @@ const Navbar: FC = () => {
   };
 
   return (
-    <nav className='px-4 py-2 md:px-16 md:py-8 '>
+    <nav className='px-4 py-2 md:px-16 md:py-8'>
       <Grid container justifyContent="space-between" alignItems="center">
         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-          <Image
-            className="min-w-256"
-            src="/assets/anascode/logos/anascode-logo-horizontal.jpg"
-            alt="AnasCode Logo"
-            data-testid="navbar-logo"
-            quality={100}
-            width={160}
-            height={128}
-          />
+          <Link href="/" aria-label='home'>
+            <Image
+              className="min-w-256"
+              src="/assets/anascode/logos/anascode-logo-horizontal.jpg"
+              alt="AnasCode Logo"
+              data-testid="navbar-logo"
+              quality={100}
+              width={160}
+              height={128}
+            />
+          </Link>
         </Box>
         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-          <Image
-            className="min-w-256"
-            src="/assets/anascode/logos/anascode-logo-horizontal.jpg"
-            alt="AnasCode Logo"
-            data-testid="navbar-logo-large"
-            quality={100}
-            width={256}
-            height={128}
-          />
+          <Link href="/" aria-label='home'>
+            <Image
+              className="min-w-256"
+              src="/assets/anascode/logos/anascode-logo-horizontal.jpg"
+              alt="AnasCode Logo"
+              data-testid="navbar-logo-large"
+              quality={100}
+              width={256}
+              height={128}
+            />
+          </Link>
         </Box>
 
         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -178,7 +183,7 @@ const Navbar: FC = () => {
             className={'text-white bg-brand-color rounded-md font-sans hover:bg-dark-accent'}
             onClick={handleHireMe}
             component="a"
-            href="#contact"
+            href="/#contact"
             aria-label={t('home.nav.hireMe') || 'hire me'}
             data-testid="navbar-button-hireme"
           >

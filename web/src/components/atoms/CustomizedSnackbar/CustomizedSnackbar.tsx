@@ -14,9 +14,10 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 export interface CustomizedSnackbarProps {
   severity: 'success' | 'info' | 'warning' | 'error';
   message: string;
+  duration?: number;
 }
 
-export default function CustomizedSnackbar({ severity, message }: CustomizedSnackbarProps) {
+export default function CustomizedSnackbar({ severity, message, duration }: CustomizedSnackbarProps) {
   const [open, setOpen] = React.useState(true);
 
 
@@ -30,11 +31,11 @@ export default function CustomizedSnackbar({ severity, message }: CustomizedSnac
 
   return (
     <Stack spacing={2} sx={{ width: '100%' }}>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+      <Snackbar open={open} autoHideDuration={duration || 6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
           {message}
         </Alert>
       </Snackbar>
-    </Stack>
+    </Stack >
   );
 }

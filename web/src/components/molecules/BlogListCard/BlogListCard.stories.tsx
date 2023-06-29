@@ -20,6 +20,7 @@ const args = {
   category: 'Technology',
   readTime: '5 min',
   createdAt: '2023-01-12T00:00:00.000Z',
+  claps: 10,
 };
 
 export const Desktop = Template.bind({});

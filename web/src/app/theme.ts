@@ -84,10 +84,13 @@ let theme = createTheme({
       fontWeight: 500,
     },
     body1: {
-      fontSize: '0.875rem',
+      fontSize: '1rem',
+      fontWeight: 500,
+      lineHeight: 1.5,
+      padding: '0.5rem 0',
     },
     body2: {
-      fontSize: '0.75rem',
+      fontSize: '0.85rem',
     },
   },
   shape: {

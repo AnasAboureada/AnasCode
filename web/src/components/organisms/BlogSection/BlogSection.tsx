@@ -13,8 +13,8 @@ const fetcher = (url: RequestInfo | URL) => fetch(url).then((res) => res.json())
 
 const BlogSection = () => {
   const { t } = useTranslation();
-  const { data: mainArticles } = useSWR('/api/blog/article/main', fetcher);
-  const { data: secondaryArticles } = useSWR('/api/blog/article/secondary', fetcher);
+  const { data: mainArticles } = useSWR('/api/blog/articles/main', fetcher);
+  const { data: secondaryArticles } = useSWR('/api/blog/articles/secondary', fetcher);
 
 
   return (
@@ -63,7 +63,7 @@ const BlogSection = () => {
           variant="outlined"
           color="primary"
           size="large"
-          href="https://medium.com/@anas-aboureada"
+          href="/blog"
           target="_blank"
           rel="noopener noreferrer"
           className={'font-sans text-brand-color'}

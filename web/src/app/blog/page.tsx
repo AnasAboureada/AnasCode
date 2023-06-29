@@ -15,7 +15,11 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { montserrat } from '../theme';
 
 const BlogPage = () => {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(() => {
+    const params = new URLSearchParams(window.location.search);
+    const pageParam = params.get('page');
+    return pageParam ? parseInt(pageParam, 10) : 1;
+  });
 
   useEffect(() => {
     window.history.replaceState({}, '', `${window.location.pathname}?page=${page}`);
@@ -30,6 +34,7 @@ const BlogPage = () => {
 
   const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
+    window.history.replaceState({}, '', `${window.location.pathname}?page=${value}`);
   };
 
   return (
@@ -38,7 +43,7 @@ const BlogPage = () => {
       <Box className="h-20 flex items-center justify-center text-brand-color" >
         <Typography variant="h4" component='h1'>Anas Aboreeda’s Blog</Typography>
       </Box>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} className="px-4 py-2 md:px-16 md:py-8">
         <Grid xs={12} md={9}>
           <main>
             <DataFetcher url={`/api/blog/articles?page=${page}`} Loader={ArticleCardSkeleton} errorMessage="Can not load articles">
@@ -56,6 +61,9 @@ const BlogPage = () => {
                         readTime={article.readTime}
                         bannerImage={article.bannerImage || `https://picsum.photos/300/200?random=${index}`}
                         createdDate={article.updatedDate || article.createdDate}
+                        slug={article.slug}
+                        claps={article.claps}
+                        views={article.views}
                       />
                     ))}
                     <Pagination

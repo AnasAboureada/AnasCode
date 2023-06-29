@@ -6,8 +6,6 @@ const nextConfig = {
   experimental: {
     forceSwcTransforms: true,
     serverComponentsExternalPackages: ["mongoose"],
-    serverActions: true,
-    mdxRs: true,
   },
   compiler: {
     styledComponents: true,

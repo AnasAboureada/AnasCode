@@ -1,5 +1,6 @@
 import path from 'path';
 
+import { SortOrder } from 'mongoose';
 import { NextRequest, NextResponse } from 'next/server';
 
 import dbConnect from '@/app/api/util/DbConnect';
@@ -47,11 +48,11 @@ export const GET = async (request: NextRequest) => {
   const skip = (parseInt(page, 10) - 1) * limit; // skip for pagination
 
   // Default sort order
-  let sortOrder = -1; // Descending
+  let sortOrder: SortOrder | string = 'desc'; // Descending
   let sortField = sort;
   if (sort[0] === '-') {
     sortField = sort.substring(1);
-    sortOrder = 1; // Ascending
+    sortOrder = 'asc'; // Ascending
   }
 
   const query: {
@@ -71,13 +72,14 @@ export const GET = async (request: NextRequest) => {
     query.highlighted = 'SECONDARY';
   }
 
+  const sortQuery: { [key: string]: SortOrder } = { [sortField]: sortOrder as SortOrder };
+
   try {
     await dbConnect();
-    console.log('query', query);
 
     const [articles, articlesCount] = await Promise.all([
-      Article.find(query)
-        .sort({ [sortField]: sortOrder })
+      Article.find({ ...query, published: true })
+        .sort(sortQuery)
         .skip(skip)
         .limit(limit)
         .select('-content'),
