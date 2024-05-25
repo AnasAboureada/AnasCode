@@ -53,28 +53,47 @@ export const readMarkdown = (filePath: string): Partial<IArticle> => {
   };
 
   const slug = data.slug || data.title.toLowerCase().replace(/ /g, '-');
+  const createdDate = parseDate(data.createdDate);
+  const createdWeek = moment(createdDate).week();
 
-  const article: Partial<IArticle> = {
-    articleId: data.articleId || `${slug}---${nanoid()}`, // provide a default or generate one
+  const defaultValues = {
+    articleId: `${slug}---${nanoid()}`,
+    description: '',
+    author: 'Anas Aboreeda',
+    authorImage: '/assets/anascode/anas-photos/anasPhoto.jpg',
+    tags: [],
+    readTime: readingTime(content).text,
+    bannerImage: `https://picsum.photos/300/200?random=${Math.ceil(Math.random() * 100) + 10}`,
+    highlighted: 'NONE',
+    published: false,
+  };
+
+  const dataValues = {
+    articleId: data.articleId,
     title: data.title,
     slug,
     metaTitle: data.metaTitle,
     metaDescription: data.metaDescription,
-    description: data.description || '',
-    createdDate: parseDate(data.createdDate),
+    description: data.description,
+    createdDate,
     updatedDate: parseDate(data.updatedDate),
-    weekNumber: data.weekNumber,
+    weekNumber: data.weekNumber || createdWeek,
     category: data.category,
     excerpt: data.excerpt,
-    author: data.author || 'Anas Aboreeda',
-    authorImage: data.authorImage || 'https://avatars.githubusercontent.com/u/22588845?v=4',
-    tags: data.tags || [],
-    readTime: readingTime(content).text,
-    bannerImage: data.bannerImage || `https://picsum.photos/300/200?random=${Math.random() * 100}`,
-    highlighted: data.highlighted || 'NONE',
-    published: data.published || true,
+    author: data.author,
+    authorImage: data.authorImage,
+    tags: data.tags,
+    bannerImage: data.bannerImage,
+    highlighted: data.highlighted,
+    published: data.published,
     content,
   };
+
+  const article: Partial<IArticle> = {
+    ...defaultValues,
+    ...dataValues,
+  };
+
 
   return article;
 };

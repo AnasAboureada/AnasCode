@@ -97,21 +97,21 @@ export interface IArticle extends Document {
   slug: string;
   metaTitle: string;
   metaDescription: string;
-  description?: string;
+  description: string;
   createdDate: Date;
-  updatedDate?: Date;
+  updatedDate: Date;
   weekNumber: string;
   category: string;
   excerpt: string;
   author: string;
-  authorImage?: string;
-  tags?: string[];
+  authorImage: string;
+  tags: string[];
   views?: number;
   claps?: number;
   readTime: string;
   bannerImage: string;
-  highlighted?: string;
-  published?: boolean;
+  highlighted?: 'PRIMARY' | 'SECONDARY' | 'NONE';
+  published: boolean;
   content: string;
 }
 
