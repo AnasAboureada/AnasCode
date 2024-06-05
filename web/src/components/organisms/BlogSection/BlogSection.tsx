@@ -63,7 +63,7 @@ const BlogSection = () => {
           variant="outlined"
           color="primary"
           size="large"
-          href="https://medium.com/@anas-aboureada"
+          href="https://medium.com/@anas-aboreeda"
           target="_blank"
           rel="noopener noreferrer"
           className={'font-sans text-brand-color'}

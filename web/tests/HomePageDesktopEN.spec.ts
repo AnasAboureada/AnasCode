@@ -97,7 +97,7 @@ test.describe('Home Page', () => {
       await newPage.waitForLoadState();
 
 
-      expect(newPage.url()).toContain('RESUME-AnasAboureada.pdf');
+      expect(newPage.url()).toContain('RESUME%20-%20Anas%20Aboreeda.pdf');
 
       await newPage.close();
     });

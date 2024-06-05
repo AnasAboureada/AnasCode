@@ -14,7 +14,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 
 export const cvDownloadLinkData = {
   label: 'home.nav.cvResume',
-  href: '/assets/pdf/RESUME-AnasAboureada.pdf',
+  href: 'https://github.com/AnasAboreeda/AnasAboreeda/blob/591a493e8eb82624316b95662bb8073576504a82/RESUME%20-%20Anas%20Aboreeda.pdf',
   pdfTitle: 'home.nav.cvResumeTitle',
 };
 

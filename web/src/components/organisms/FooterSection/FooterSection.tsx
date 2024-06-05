@@ -23,13 +23,13 @@ const FooterSection = () => {
         © {currentYear} AnasCode.com - All Rights Reserved
       </Typography>
       <div className="flex space-x-2">
-        <a href="https://twitter.com/AnasAboureada" target='_blank' aria-label='twitter'>
+        <a href="https://twitter.com/AnasAboreeda" target='_blank' aria-label='twitter'>
           <TwitterIcon />
         </a>
-        <a href="https://github.com/AnasAboureada" target='_blank' aria-label='github'>
+        <a href="https://github.com/AnasAboreeda" target='_blank' aria-label='github'>
           <GitHubIcon />
         </a>
-        <a href="https://www.linkedin.com/in/anasaboureada/" target='_blank' aria-label='linkedin'>
+        <a href="https://www.linkedin.com/in/anasaboreeda/" target='_blank' aria-label='linkedin'>
           <LinkedInIcon />
         </a>
       </div>

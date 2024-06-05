@@ -7,7 +7,7 @@ import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 const metadata = {
   title: 'AnasCode',
-  description: 'Software Engineer | Data Scientist',
+  description: 'Principal Software Engineer | Tech Lead | AI Enthusiast',
 };
 
 

@@ -10,7 +10,7 @@ export const GET = async () => {
       description: `learn how to design better algorithms by comparing their run time and space.
       How do we know if algorithm A is better than algorithm B?`,
       category: 'Algorithms',
-      url: 'https://blog.aboureada.com/all-you-need-to-know-about-algorithms-complexity-analysis-and-big-o-notation-o-n-6cf161429817',
+      url: 'https://medium.com/@anas-aboreeda/all-you-need-to-know-about-algorithms-complexity-analysis-and-big-o-notation-o-n-6cf161429817',
       image: 'https://miro.medium.com/v2/resize:fit:4800/format:webp/0*LGiqhSzLln5lww26.jpeg',
     },
     {
@@ -18,7 +18,7 @@ export const GET = async () => {
       description: 'In this article, we will learn how to solve the “Large Fibonacci Number modulo M” Problem in Java.',
       category: 'Problem Solving',
       image: 'https://miro.medium.com/v2/resize:fit:4800/format:webp/1*5K99UCTWypVMOh3qXXQ0ww.jpeg',
-      url: 'https://medium.com/@anas-aboureada/solution-of-fibonacci-number-modulo-m-problem-in-java-fac11fbce187',
+      url: 'https://medium.com/@anas-aboreeda/solution-of-fibonacci-number-modulo-m-problem-in-java-fac11fbce187',
     },
   ];
 
